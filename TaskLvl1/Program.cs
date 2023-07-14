@@ -60,6 +60,55 @@ namespace TaskLvl1
 			else Console.WriteLine("No operation");
 			*/
 			#endregion TASK_4
+			#region TASK_5
+			/*
+			ConsoleKey key;
+			do
+			{
+				key = Console.ReadKey(true).Key;
+				switch (key)
+				{
+					case ConsoleKey.S: Console.WriteLine("Назад"); break;
+					case ConsoleKey.W: Console.WriteLine("Вперед"); break;
+					case ConsoleKey.A: Console.WriteLine("Влево"); break;
+					case ConsoleKey.D: Console.WriteLine("Вправо"); break;
+					case ConsoleKey.Spacebar: Console.WriteLine("Прыжок"); break;
+					case ConsoleKey.Enter: Console.WriteLine("Огонь"); Console.Beep(); break;
+
+					default: Console.WriteLine("Error"); break;
+				}
+			} while (key != ConsoleKey.Escape);
+			*/
+			#endregion TASK_5
+
+			//Console.CursorVisible = true;
+
+
+
+			ConsoleKey key;
+			int x = 40;
+			int y = 40;
+			do
+			{
+				key = Console.ReadKey(true).Key;
+				Console.SetCursorPosition(x, y);
+				switch (key)
+				{
+					case ConsoleKey.W: y--; break;
+					case ConsoleKey.S: y++; break;
+					case ConsoleKey.A: x--; break;
+					case ConsoleKey.D: x++; break;
+					default: Console.Beep(); break;
+
+				}
+
+				//Console.BackgroundColor = ConsoleColor.Red;
+				Console.WriteLine(".");
+				//Console.BackgroundColor = ConsoleColor.Black; 
+			} while (key != ConsoleKey.Escape);
+
+
+
 
 		}
 	}
