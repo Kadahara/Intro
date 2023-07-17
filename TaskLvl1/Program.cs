@@ -101,8 +101,8 @@ namespace TaskLvl1
 
 			Console.Title = ("Играй в Змейку (1.2 Beta)");
 
-			Console.BufferHeight = Console.WindowHeight + 1;
-			Console.BufferWidth = Console.WindowWidth + 1;
+			Console.BufferHeight = Console.WindowHeight  ;
+			Console.BufferWidth = Console.WindowWidth  ;
 			//Console.WriteLine($"Windows: {Console.WindowWidth} {Console.WindowHeight}");
 			//Console.WriteLine($"Buffer: {Console.BufferWidth} {Console.BufferHeight}");
 			menu();
@@ -115,8 +115,8 @@ namespace TaskLvl1
 
 			//Положения яблока
 			Random rand = new Random();
-			int x_fud = rand.Next(Console.WindowWidth - 1);
-			int y_fud = rand.Next(1, Console.WindowHeight - 1);
+			int x_fud = rand.Next(Console.WindowWidth - 2);
+			int y_fud = rand.Next(1, Console.WindowHeight - 2);
 			// Кол во яблок
 			int fud = 0;
 			int win = 10;
@@ -163,29 +163,33 @@ namespace TaskLvl1
 							{
 								case ConsoleKey.UpArrow:
 								case ConsoleKey.W:
-									if (rotation == 2){error = true;break;}
+									if (rotation == 2){error = true;break; }
 									y--;
+									Console.Beep(4300, 1);
 									rotation = 1;
 									error = false;
 									break;
 								case ConsoleKey.DownArrow:
 								case ConsoleKey.S:
-									if (rotation == 1){error = true;break;}
+									if (rotation == 1){error = true;break; }
 									y++;
+									Console.Beep(4200, 1);
 									rotation = 2;
 									error = false;
 									break;
 								case ConsoleKey.LeftArrow:
 								case ConsoleKey.A:
-									if (rotation == 4){error = true;break;}
+									if (rotation == 4){error = true;break; }
 									x--;
+									Console.Beep(4500, 1);
 									rotation = 3;
 									error = false;
 									break;
 								case ConsoleKey.RightArrow:
 								case ConsoleKey.D:
-									if (rotation == 3){error = true;break;}
+									if (rotation == 3){error = true;break; }
 									x++;
+									Console.Beep(4300, 1);
 									rotation = 4;
 									error = false;
 									break;
@@ -198,38 +202,41 @@ namespace TaskLvl1
 								admin = true; break; 
 								default: Console.Beep(); break;
 							}
-
+							// ползанье сквозь стены
 							if (x < 0) x = Console.BufferWidth - 1;
-							if (y < 0) y = Console.BufferHeight - 3;
+							if (y < 1) y = Console.BufferHeight - 2;
 							if (x > Console.BufferWidth - 1) x = 0;
-							if (y > Console.BufferHeight - 3) y = 0;
+							if (y > Console.BufferHeight - 2) y = 0;
+							// поедание яблок
 							if (x == x_fud && y == y_fud)
 							{
-								x_fud = rand.Next(Console.WindowWidth - 1); y_fud = rand.Next(1, Console.WindowHeight - 1); // перемещения яблока
+								x_fud = rand.Next(Console.WindowWidth - 1); y_fud = rand.Next(1, Console.WindowHeight - 2); // перемещения яблока
 								fud++;// счетчик очков
 								outOfRange++; //сигнал при начислении очков
 								sneki_1++; // размер змейки
 							}
 							if (outOfRange > 0) Console.Beep(300, 170);
-
+							// рост змейки
 							if (sneki_1 == sneki_2 && error != true) { Console.Clear(); sneki_2 = sneki_2 - sneki_1; }
 							if (error != true) sneki_2++;
-							//Console.BackgroundColor = ConsoleColor.Red;
+
+							// Вид змейки и яблока
 							Console.SetCursorPosition(x, y);
-							Console.ForegroundColor = ConsoleColor.Green;
+							Console.ForegroundColor = ConsoleColor.Yellow;
+							Console.BackgroundColor = ConsoleColor.Green;
 							Console.WriteLine("+");
+							Console.BackgroundColor = ConsoleColor.Black;
 							Console.ForegroundColor = ConsoleColor.White;
-							//Console.BackgroundColor = ConsoleColor.Black;
+
 							Console.SetCursorPosition(x_fud, y_fud);
 							Console.ForegroundColor = ConsoleColor.Red;
 							Console.WriteLine("@");
 							Console.ForegroundColor = ConsoleColor.White;
-							Console.SetCursorPosition(65, 0);
-							//Console.WriteLine($"X = {x}");
-							//Console.WriteLine($"Y = {y}");
-							Console.WriteLine("W,S,A,D - передвижение       Escape - Закончить Игру");
+
+							Console.SetCursorPosition(72, 0);
+							Console.WriteLine("W,S,A,D - передвижение   Escape - Закончить Игру");
 							Console.SetCursorPosition(1, 0);
-							Console.WriteLine($"Яблок скушено: {fud}");
+							Console.WriteLine($"Яблок скушено: {fud}, осталось {win-fud}");
 							if (admin == true)
 							{
 								Console.WriteLine($"snike: {sneki_1} : {sneki_2}");
@@ -239,7 +246,8 @@ namespace TaskLvl1
 								Console.WriteLine($"X {x} : y {y}");
 								Console.WriteLine($"fud x = {x_fud} : fud y = {y_fud}");
 							}
-							if (error == true){Console.Beep();Console.SetCursorPosition(20, 0);Console.WriteLine("Нельзя двигаться в обратном направлении!");}
+							// ИНФОРМАЦИЯ ОБ ОШИБКИ ДВИЖЕНИЯ
+							if (error == true){Console.Beep();Console.SetCursorPosition(31, 0);Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Нельзя двигаться в обратном направлении!"); Console.ForegroundColor = ConsoleColor.White;}
 
 							if (fud == win) key = ConsoleKey.Escape;
 						} while (key != ConsoleKey.Escape);
@@ -317,7 +325,7 @@ namespace TaskLvl1
 						Console.SetCursorPosition(30, 3);
 						Console.WriteLine("В случае если клавиша не используется вы услышите БИП");
 						Console.SetCursorPosition(30, 5);
-						Console.WriteLine("U - показатель с параметрами");
+						Console.WriteLine("U - Режим разработчика (Для просмотра)");
 						Console.SetCursorPosition(48, 28);
 						Console.WriteLine("Игра находится на стадии Бета-Теста, конечный продукт может отличаться");
 						break;
