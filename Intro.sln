@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskLvl1", "TaskLvl1\TaskLv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arrays", "Arrays\Arrays.csproj", "{D32C0692-D098-4E01-9794-1964265A7FB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetaTest_1.1", "BetaTest_1.1\BetaTest_1.1.csproj", "{44F062AD-97B6-4AC9-9CA8-1892B99D03FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D32C0692-D098-4E01-9794-1964265A7FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D32C0692-D098-4E01-9794-1964265A7FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D32C0692-D098-4E01-9794-1964265A7FB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F062AD-97B6-4AC9-9CA8-1892B99D03FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F062AD-97B6-4AC9-9CA8-1892B99D03FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F062AD-97B6-4AC9-9CA8-1892B99D03FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F062AD-97B6-4AC9-9CA8-1892B99D03FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
