@@ -242,21 +242,60 @@
 			string reviews = Console.ReadLine();
 			*/
 			#endregion MENU
+			int rotation = 0;
+			bool error = false;
 			do
 			{
 				int outOfRange = 0;
 				key = Console.ReadKey(true).Key;
-
 				switch (key)
 				{
 					case ConsoleKey.UpArrow:
-					case ConsoleKey.W: y--; break;
+					case ConsoleKey.W:
+						if (rotation == 2)
+						{
+							error = true;
+							break;
+						}
+						y--;
+						rotation = 1;
+						error = false;
+						break;
 					case ConsoleKey.DownArrow:
-					case ConsoleKey.S: y++; break;
+					case ConsoleKey.S:
+						if (rotation == 1) 
+						{
+							error = true;
+							break;
+						}
+						y++;
+						rotation = 2;
+						error = false;
+						break;
 					case ConsoleKey.LeftArrow:
-					case ConsoleKey.A: x--; break;
+					case ConsoleKey.A:
+						if (rotation == 4) 
+						{
+							error = true;
+							break;
+						}
+						x--;
+						rotation = 3;
+						error = false;
+						break;
 					case ConsoleKey.RightArrow:
-					case ConsoleKey.D: x++; break;
+					case ConsoleKey.D:
+						if (rotation == 3) 
+						{
+							error = true;
+							break;
+						}  
+						x++;
+						rotation = 4;
+						error = false;
+						break;
+
+
 					case ConsoleKey.R:
 						x_fud = rand.Next(Console.WindowWidth - 1);
 						y_fud = rand.Next(1, Console.WindowHeight - 1);
@@ -277,8 +316,8 @@
 				}
 				if (outOfRange > 0) Console.Beep(300, 170);
 
-				if (sneki_1 == sneki_2) { Console.Clear(); sneki_2 = sneki_2 - sneki_1; }
-				sneki_2++;
+				if (sneki_1 == sneki_2 && error != true) { Console.Clear(); sneki_2 = sneki_2 - sneki_1; }
+				if (error != true)sneki_2++;
 				//Console.BackgroundColor = ConsoleColor.Red;
 				Console.SetCursorPosition(x, y);
 				Console.ForegroundColor = ConsoleColor.Green;
@@ -296,8 +335,15 @@
 				Console.SetCursorPosition(1, 0);
 				Console.WriteLine($"Яблок скушено: {fud}");
 				Console.WriteLine($"snike: {sneki_1} : {sneki_2}");
+				Console.WriteLine($"rotation: {rotation} ");
+				if (error == true)
+				{
+					Console.Beep();
+					Console.SetCursorPosition(20, 0);
+					Console.WriteLine("Нельзя двигаться в обратном направлении!");
+				}
 
-				if (fud == win) key = ConsoleKey.Escape;
+					if (fud == win) key = ConsoleKey.Escape;
 			} while (key != ConsoleKey.Escape);
 			Console.Clear();
 			if (fud == win)
