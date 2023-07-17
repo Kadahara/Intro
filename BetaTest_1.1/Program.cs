@@ -339,6 +339,8 @@
 			int rotation = 0;
 			bool error = false;
 
+
+
 			//Положения яблока
 			Random rand = new Random();
 			int x_fud = rand.Next(Console.WindowWidth - 1);
